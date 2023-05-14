@@ -8,6 +8,7 @@ const radmin = require("./Route/rAdmin");
 const rpststudposting= require("./Route/rPststudposting");
 const rpastStudRegister= require("./Route/rPastStudRegister");
 const radminLogin= require("./Route/rLogin");
+const rcurrentStudentRegister= require("./Route/rCurrentStudRegister");
 
 
 app.use(cors());
@@ -17,6 +18,8 @@ app.use("/user", radmin);
 app.use("/user", rpststudposting);
 app.use("/user", rpastStudRegister);
 app.use("/user", radminLogin);
+app.use("/user", rcurrentStudentRegister);
+
 
 // app.use("/user", rpststudposting);
 

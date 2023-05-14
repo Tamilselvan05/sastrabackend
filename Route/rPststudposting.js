@@ -9,6 +9,7 @@ const mPststudposting = require("../Model/mPststudposting");
 router.post("/pststudposting", function (req, res) {
   console.log(req.body);
   let userPastStudPosting = new mPststudposting();
+  userPastStudPosting.name = req.body.name;
 
   userPastStudPosting.title = req.body.title;
   userPastStudPosting.description = req.body.description; 
