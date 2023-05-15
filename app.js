@@ -19,6 +19,8 @@ app.use("/user", rpststudposting);
 app.use("/user", rpastStudRegister);
 app.use("/user", radminLogin);
 app.use("/user", rcurrentStudentRegister);
+// app.use("/user", rdelete);
+
 
 
 // app.use("/user", rpststudposting);

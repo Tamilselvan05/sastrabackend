@@ -13,7 +13,7 @@ router.post("/currentStudentRegister", function (req, res) {
   currentStudentRegister.name = req.body.name;
   currentStudentRegister.email = req.body.email; 
   currentStudentRegister.department = req.body.department; 
-  currentStudentRegister.password = req.body.Password; 
+  currentStudentRegister.password = req.body.password; 
   currentStudentRegister.confirmPassword = req.body.confirmPassword; 
   currentStudentRegister.currentStudent = req.body.currentStudent; 
 

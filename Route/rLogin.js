@@ -3,10 +3,12 @@ const express = require("express");
 const router = express.Router();
 // const mCustomer = require("../Model/mCustomer");
 const mAdminLogin = require("../Model/mLogin");
+const mpastStudRegister = require("../Model/mpastStudRegister");
+const mCurrentStudRegister = require("../Model/mCurrentStudRegister");
 
 
 
-router.post("/adminLogin", function (req, res) {
+router.post("/adminLogin", async function (req, res) {
 
 
     let query = {
@@ -14,8 +16,31 @@ router.post("/adminLogin", function (req, res) {
         password: req.body.password,
     }
 
+    let passedStudQuery = {
+        name: req.body.userName,
+        confirmPassword: req.body.password,
+    }
+
+    let currentStudQuery = {
+        name: req.body.userName,
+        confirmPassword: req.body.password,
+    }
+
+    console.log("stdudent query");
+    console.log({ passedStudQuery, currentStudQuery });
+
+    let currentStuDocs = null;
+    let passStudDocs = await mpastStudRegister.findOne(passedStudQuery);
+    let currentStuAllDocs = await mCurrentStudRegister.find({});
     console.log({ query })
+    console.log("student datailsssss");
+    console.log({ passStudDocs, currentStuDocs });
+
+
+
     mAdminLogin.find({}, (err, docs) => {
+        console.log("docs");
+        console.log(docs);
         let responseObj = {
             isUserFound: false,
             data: {}
@@ -28,8 +53,23 @@ router.post("/adminLogin", function (req, res) {
                     responseObj.isUserFound = true;
                     responseObj.data = each;
                 }
-            }); 
-            res.send({ 'data': responseObj })
+            });
+
+
+
+            if (currentStuAllDocs.length) {
+                currentStuAllDocs.forEach(eachCurentStu => {
+                    if (req.body.userName == eachCurentStu.name
+                        && req.body.password == eachCurentStu.confirmPassword) {
+                        currentStuDocs = eachCurentStu;
+                    }
+                })
+            }
+
+
+
+
+            res.send({ 'data': responseObj, passStudDocs, currentStuDocs })
         }
     });
     // let adminLogin = new mLogin();
